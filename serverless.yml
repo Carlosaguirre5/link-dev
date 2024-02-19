@@ -15,3 +15,6 @@ functions:
     - http:
         path: hello
         method: get
+plugins:
+  - serverless-offline
+  - serverless-python-requirements
