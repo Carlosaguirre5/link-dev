@@ -10,10 +10,10 @@ provider:
 
 functions:
   hello:
-    handler: handler.hello
+    handler: handler.get_inventario
     events:
     - http:
-        path: hello
+        path: inventario
         method: get
 plugins:
   - serverless-offline
