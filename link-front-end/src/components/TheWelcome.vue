@@ -7,6 +7,8 @@ import CommunityIcon from './icons/IconCommunity.vue'
 import SupportIcon from './icons/IconSupport.vue'
 </script>
 
+//esto es un comentario
+
 <template>
   <WelcomeItem>
     <template #icon>
