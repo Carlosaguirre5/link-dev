@@ -12,11 +12,7 @@ def get_inventario(event, context):
     result.replace('\\', '')
     result = json.loads(result)
 
-    body = {
-        "inventario": result
-    }
-
     return {
         "statusCode": 200,
-        "body": json.dumps(body)
+        "body": json.dumps(result)
     }
