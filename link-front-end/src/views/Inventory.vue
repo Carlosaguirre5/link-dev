@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="background-color: rgba(250, 235, 215, 0.418); border-radius: 5px;">
         <h1>API Data</h1>
         <ul>
             <li v-for="item in items" :key="item._id.$oid">
@@ -23,7 +23,7 @@ export default {
     methods: {
         async fetchData() {
             try {
-                const response = await fetch('http://localhost:3000/dev/inventario');
+                const response = await fetch('https://stevedev.online/apilink/dev/inventario');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
