@@ -1,38 +1,47 @@
+<script setup>
+    import { ref, onMounted } from "vue"
+    import "./styles/inventory.scss"
+    import Card from "../components/Card.vue"
+
+    const items = ref(null)
+    const loading = ref(false)
+
+    async function fetchData() {
+        try {
+            loading.value = true
+            const response = await fetch('/apilink/dev/inventario');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            items.value = data; // Assuming the response is an array of items
+            console.log(items || "aun no")
+        } catch (error) {
+            console.error('There was a problem fetching the data:', error);
+        } finally {
+            loading.value = false
+        }
+    }
+    onMounted(fetchData)
+</script>
+
 <template>
-    <div style="background-color: rgba(250, 235, 215, 0.418); border-radius: 5px;">
-        <h1>API Data</h1>
-        <ul>
-            <li v-for="item in items" :key="item._id.$oid">
-                <div>{{ item.marca }}</div>
-                <div>{{ item.modelo }}</div>
-            </li>
-        </ul>
+    <div>
+        <div v-if="loading" class="container">
+            Cargandooo...
+        </div>
+        <div v-else class="container">
+            <div v-for="item in items" :key="item._id.$oid">
+                <Card :marca="item.marca" :modelo="item.modelo" />
+            </div>
+        </div>
     </div>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            items: []
-        };
-    },
-    mounted() {
-        this.fetchData();
-    },
-    methods: {
-        async fetchData() {
-            try {
-                const response = await fetch('https://stevedev.online/apilink/dev/inventario');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                this.items = data; // Assuming the response is an array of items
-            } catch (error) {
-                console.error('There was a problem fetching the data:', error);
-            }
-        }
+<style scoped lang="scss">
+    .container {
+        display: flex;
+        justify-content: center;
+        gap: 2rem
     }
-};
-</script>
+</style>
