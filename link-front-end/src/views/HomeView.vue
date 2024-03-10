@@ -3,27 +3,36 @@
   import { useRouter } from "vue-router"
   const router = useRouter()
   const input = ref("")
+  const col = ref(false)
 
   const handleEnterKey = () => {
-    if (input.value !== "steven") {
+    if (input.value !== "secret") {
         input.value = ""
-        alert("campo reiniciado")
+        col.value=true
     }else{
+
         router.push("inventario")
     }
   }
 </script>
 <template>
   <main class="main">
-    <div style="margin-bottom: 50px;">Link la mejor plataforma</div>
+    <div class="link">Link</div>
     <div class="input">
       <input type="password" v-model="input" @keyup.enter.prevent="handleEnterKey" placeholder="your secret key"/>
+    </div>
+    <div v-if="col" class="alert">
+        incorrect secret
     </div>
   </main>
 </template>
 
 
 <style scoped lang="scss">
+  .link{
+      margin-bottom: 100px;
+      font-size: 3rem;
+  }
   .text-center {
     & .v-field__input {
       text-align: center;

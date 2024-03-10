@@ -1,10 +1,16 @@
 <script setup>
     import { ref, onMounted } from "vue"
+    import { useRouter } from "vue-router"
+    const router = useRouter()
     import "./styles/inventory.scss"
     import Card from "../components/Card.vue"
 
     const items = ref(null)
     const loading = ref(false)
+    const button = ref(false)
+    // cosnt handleClick = ()=>{
+    //     router.push("/vue")
+    // }
 
     async function fetchData() {
         try {
@@ -32,8 +38,9 @@
         </div>
         <div v-else class="container">
             <div v-for="item in items" :key="item._id.$oid">
-                <Card :marca="item.marca" :modelo="item.modelo" />
+                <Card :link="item.link" :marca="item.marca" :modelo="item.modelo" :rese="item.rese" />
             </div>
+            <v-btn ref="button" @click="handleClick">Salir</v-btn>
         </div>
     </div>
 </template>
